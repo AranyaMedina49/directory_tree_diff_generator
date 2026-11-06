@@ -64,3 +64,10 @@ and `unchanged`. All are sorted. `unchanged` is empty unless `include_unchanged=
 
 - `is_empty()` returns `True` when `added`, `removed`, and `modified` are all empty.
 - `as_dict()` returns a plain dictionary with lists, suitable for `json.dumps`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
